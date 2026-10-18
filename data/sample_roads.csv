@@ -1,0 +1,14 @@
+from,to,weight
+Depot,A,4
+Depot,B,2
+B,A,1
+A,C,5
+B,C,8
+B,D,10
+C,D,2
+C,E,3
+D,F,11
+E,D,4
+E,F,6
+F,Warehouse,3
+D,Warehouse,9
