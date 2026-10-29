@@ -1,7 +1,3 @@
-"""Closest pair of hubs in 2D (Divide & Conquer).
-
-Recurrence: T(n) = 2T(n/2) + O(n)  ->  O(n log n).
-"""
 import math
 import random
 import time
@@ -12,7 +8,6 @@ def dist(a, b):
 
 
 def brute_force(points):
-    """O(n^2). Returns (distance, (p, q)) or None if fewer than 2 points."""
     best = None
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
@@ -29,16 +24,16 @@ def _rec(px, py):
     mid = n // 2
     mid_x = px[mid][0]
     left_px, right_px = px[:mid], px[mid:]
-    left_ids = {p[2] for p in left_px}          # ids make duplicates safe
+    left_ids = {p[2] for p in left_px}          
     left_py = [p for p in py if p[2] in left_ids]
     right_py = [p for p in py if p[2] not in left_ids]
 
     best = min(_rec(left_px, left_py), _rec(right_px, right_py), key=lambda r: r[0])
     d = best[0]
 
-    strip = [p for p in py if abs(p[0] - mid_x) < d]   # sorted by y
+    strip = [p for p in py if abs(p[0] - mid_x) < d]   
     for i in range(len(strip)):
-        for j in range(i + 1, min(i + 8, len(strip))):  # at most 7 neighbours
+        for j in range(i + 1, min(i + 8, len(strip))):  
             dd = dist(strip[i], strip[j])
             if dd < d:
                 d, best = dd, (dd, (strip[i], strip[j]))
@@ -46,7 +41,6 @@ def _rec(px, py):
 
 
 def closest_pair(points):
-    """Return (distance, (p, q)) or None if fewer than 2 points."""
     if len(points) < 2:
         return None
     tagged = [(p[0], p[1], i) for i, p in enumerate(points)]
@@ -57,7 +51,6 @@ def closest_pair(points):
 
 
 def benchmark(sizes=(100, 1000), seed=1):
-    """Rows of (n, brute_seconds, dc_seconds, same_distance)."""
     rng = random.Random(seed)
     rows = []
     for n in sizes:

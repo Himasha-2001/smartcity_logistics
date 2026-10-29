@@ -1,13 +1,4 @@
-"""Shortest path via Bellman-Ford (chosen because road maps contain cycles).
-
-DP: dist_k[v] = min(dist_{k-1}[v], min over edges (u,v): dist_{k-1}[u] + w)
-After |V|-1 rounds every shortest path (<= |V|-1 edges) is settled.
-O(VE) time, O(V) space. A further improving pass reveals a negative cycle.
-"""
-
-
 def bellman_ford(edges, source):
-    """edges: list of (u, v, w) directed. Returns (dist, pred)."""
     nodes = {source}
     for u, v, _ in edges:
         nodes.update((u, v))
@@ -29,7 +20,6 @@ def bellman_ford(edges, source):
 
 
 def shortest_path(edges, source, target, directed=False):
-    """Returns (cost, path_list); (inf, []) if unreachable."""
     if not directed:
         edges = list(edges) + [(v, u, w) for u, v, w in edges]
     dist, pred = bellman_ford(edges, source)

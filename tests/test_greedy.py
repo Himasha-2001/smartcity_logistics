@@ -26,7 +26,6 @@ class TestFractionalKnapsack(unittest.TestCase):
         self.assertEqual(fractional_knapsack([("a", 5, 10)], 0)[0], 0)
 
     def test_greedy_fails_for_01(self):
-        # same items, indivisible: greedy-by-ratio takes a+b = 160, optimum is b+c = 220
         from dynamic_programming.knapsack_01 import knapsack_1d
         self.assertEqual(knapsack_1d([(10, 60), (20, 100), (30, 120)], 50), 220)
 

@@ -1,4 +1,3 @@
-"""Huffman coding for delivery manifests. O(n log k) for k distinct symbols."""
 import heapq
 import itertools
 from collections import Counter
@@ -18,7 +17,7 @@ class Node:
 def build_tree(text):
     if not text:
         return None
-    tie = itertools.count()                     # deterministic tie-breaking
+    tie = itertools.count()                    
     heap = [(f, next(tie), Node(c, f)) for c, f in sorted(Counter(text).items())]
     heapq.heapify(heap)
     while len(heap) > 1:
@@ -31,7 +30,7 @@ def build_tree(text):
 def build_codes(root):
     if root is None:
         return {}
-    if root.is_leaf:                            # single distinct symbol
+    if root.is_leaf:                            
         return {root.char: "0"}
     codes = {}
 
@@ -65,7 +64,6 @@ def decode(bits, root):
 
 
 def compression_stats(text, encoded):
-    """Compare with 8-bit ASCII (code table/tree overhead not counted)."""
     original = 8 * len(text)
     compressed = len(encoded)
     return {"original_bits": original, "compressed_bits": compressed,
