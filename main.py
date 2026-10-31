@@ -1,4 +1,4 @@
-"""SmartCity Logistics dashboard: python main.py  (or: python main.py <number>)"""
+"""SmartCity Logistics dashboard: python main.py  """
 import csv
 import os
 import sys
@@ -8,7 +8,8 @@ from divide_conquer.closest_pair import closest_pair, benchmark
 from greedy.activity_selection import activity_selection
 from greedy.fractional_knapsack import fractional_knapsack
 from greedy.huffman import build_tree, build_codes, encode, decode, compression_stats
-from dynamic_programming.knapsack_01 import knapsack_2d, knapsack_1d, knapsack_bruteforce
+from dynamic_programming.knapsack_01 import (knapsack_2d, knapsack_1d, knapsack_bruteforce,
+                                             benchmark as knapsack_benchmark, memory_comparison)
 from dynamic_programming.shortest_path_dp import shortest_path
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
@@ -71,8 +72,12 @@ def truck_knapsack():
     best, chosen, _ = knapsack_2d(items, 50)
     print(f"Capacity 50 -> best value {best} (1D check: {knapsack_1d(items, 50)})")
     print("  Load:", [rows[i]["item"] for i in chosen])
-    small = items[:15]
-    print("  Brute-force on 15 items agrees:", knapsack_bruteforce(small, 50) == best)
+    print("  Brute force on all", len(items), "items agrees:", knapsack_bruteforce(items, 50) == best)
+    print("\nRuntime (n, brute_s, 2D_s, 1D_s, same_answer):")
+    for row in knapsack_benchmark():
+        print("  ", row)
+    peak_2d, peak_1d = memory_comparison()
+    print(f"\nPeak memory, 100 items x capacity 1000: 2D {peak_2d // 1024} KB vs 1D {peak_1d // 1024} KB")
 
 
 def routes():
