@@ -53,20 +53,12 @@ def _sort(items, key, counter):
 
 
 def merge_sort(items, key=None):
-    """Return a new list with `items` sorted in ascending order.
- 
-        items: any list of comparable items.
-        key:   optional function that extracts the value to compare and to sort packages by deadline.
-    """
+    """Return a new list with `items` sorted in ascending order."""
     return merge_sort_counted(items, key)[0]
 
 
 def merge_sort_counted(items, key=None):
-    """ count the comparisons made.
- 
-    Returns the number of key comparisons performed while merging. For n items it is at most
-        about n * log2(n), which is what confirms O(n log n).
-    """
+    """ count the comparisons made."""
     counter = {"comparisons": 0}
     result = _sort(list(items), key or (lambda x: x), counter)
     return result, counter["comparisons"]
@@ -74,10 +66,6 @@ def merge_sort_counted(items, key=None):
 
 def empirical_check(sizes=(100, 1000, 10000), seed=42):
     """Measure comparisons on random data to confirm O(n log n) growth.
- 
-    For each n, sorts n random integers and compares the number of
-    comparisons with n * log2(n).
- 
     `seed` makes the random data.
     """
     rng = random.Random(seed)

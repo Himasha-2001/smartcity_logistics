@@ -51,9 +51,6 @@ def brute_force(points):
     """Check all pairs of points to find the closest pair.
        Used for small inputs (3 or fewer points) and to verify
        the results in tests and benchmarks.
-
-       Returns: The shortest distance and the two closest points.
-                Returns None if there are fewer than 2 points.
     """
     best = None
     for i in range(len(points)):
@@ -65,16 +62,7 @@ def brute_force(points):
 
 
 def _rec(px, py):
-    """Find the closest pair of points using the divide and conquer method.
-
-    inputs:
-        px: Points sorted by x-coordinate.
-        py: The same points sorted by y-coordinate.
-        Each point contains (x, y, id), where id helps
-        identify points even if they have the same coordinates.
-
-    Returns:The shortest distance and the two closest points.
-    """
+    """Find the closest pair of points using the divide and conquer method."""
     n = len(px)
     if n <= 3:      # base case: brute force
         return brute_force(px)
@@ -100,17 +88,7 @@ def _rec(px, py):
 
 
 def closest_pair(points):
-    """Find the two closest points using the divide and conquer method
-
-    inputs:
-        points: A list of (x, y) coordinates. The original list is not changed.
-
-    Returns:
-        The shortest distance and the two closest points.
-        Returns None if there are fewer than 2 points.
-        Returns 0.0 if two points have the same coordinates.
-
-    """
+    """Find the two closest points using the divide and conquer method """
     if len(points) < 2:
         return None
     tagged = [(p[0], p[1], i) for i, p in enumerate(points)]
@@ -127,15 +105,6 @@ def benchmark(sizes=(100, 1000), seed=1):
     different input sizes and Measures their execution times
     and checks whether both find the same shortest distance.
 
-    Returns:
-        A list containing the number of points, execution times
-        of both algorithms, and whether their answers match.
-
-        The performance difference increases as the number
-        of points grows.
-
-    Seed:
-        To Ensures the same random points are generated each time.
     """
     rng = random.Random(seed)
     rows = []

@@ -20,7 +20,7 @@
         O(W) for 1D DP.
         O(n) auxiliary recursion space for brute force.
 
-    Weights and capacity must be non-negative integers.
+    Weights and capacity must be non negative integers.
 """
 import random
 import time
@@ -43,25 +43,7 @@ def _check_items(items, capacity):
 
 
 def knapsack_2d(items, capacity):
-    """Find the maximum value of items that can fit within a given capacity using a 2D Dynamic Programming table.
-
-    inputs:
-        items: A list of items containing weight and value
-        capacity: The maximum weight allowed.
-
-    Returns:
-        A tuple containing:
-            best_value: The maximum total value.
-            chosen_indices: The positions of selected items.
-            table: The DP table containing the calculated values.
-
-    Raises:
-        ValueError: If capacity or any item weight is negative or is not an integer.
-
-
-    Time Complexity: O(nW)
-    Space Complexity: O(nW)
-    """
+    """Find the maximum value of items that can fit within a given capacity using a 2D Dynamic Programming table."""
     _check_items(items, capacity)
     n = len(items)
     dp = [[0] * (capacity + 1) for _ in range(n + 1)]
@@ -85,13 +67,6 @@ def knapsack_1d(items, capacity):
 
     Only one array is used to store the calculated values.
     The capacity is updated backwards to make sure each item is selected at most once.
-
-    Returns:
-        The maximum total value that can be achieved.
-        Selected item positions cannot be retrieved using this method.
-
-    Time Complexity: O(nW)
-    Space Complexity: O(W)
     """
     _check_items(items, capacity)
     dp = [0] * (capacity + 1)
@@ -112,8 +87,6 @@ def knapsack_bruteforce(items, capacity, i=0):
 
     Returns: The maximum total value that can be achieved.
 
-    Time Complexity: O(2^n)
-    Space Complexity: O(n)
     """
     if i == len(items):
         return 0
@@ -166,13 +139,6 @@ def memory_comparison(n=100, capacity=1000, seed=1):
     """Compare the peak memory usage of the 2D and 1D DP versions using tracemalloc module.
 
     The 2D version stores a complete table, while the 1D version uses only a single array.
-
-    Returns:
-        peak_2d_bytes: Peak memory used by the 2D version.
-        peak_1d_bytes: Peak memory used by the 1D version.
-
-    The 1D version should use much less memory because it stores fewer values. This comparison demonstrates the memory
-    optimisation of the 1D approach.
     """
     rng = random.Random(seed)
     items = [(rng.randint(1, 50), rng.randint(1, 100)) for _ in range(n)]

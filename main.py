@@ -13,7 +13,7 @@ from dynamic_programming.knapsack_01 import (knapsack_2d, knapsack_1d, knapsack_
 from dynamic_programming.shortest_path_dp import shortest_path
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
-VAN_CAPACITY = 50          # kg, used by the van (greedy) and truck (DP) demos
+VAN_CAPACITY = 50          # kg, used by the van (greedy) and truck (DP)
 
 
 # ---------------------------------------------------------------- data loading

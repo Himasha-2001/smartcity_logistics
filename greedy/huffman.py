@@ -14,11 +14,6 @@
 
     Prefix free coding ensures that the encoded text can be
     decoded without confusion.
-
-    Time Complexity:O(n + k log k), where n is the text length and k is
-                    the number of distinct characters.
-
-    Space Complexity:O(k) for storing the Huffman tree and character codes.
 """
 
 

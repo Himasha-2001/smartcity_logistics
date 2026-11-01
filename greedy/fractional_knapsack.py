@@ -7,16 +7,6 @@ Greedy Choice:
     Select items with the highest value per weight first.
     Take a fraction of an item if the remaining capacity
     is not enough for the whole item.
-
-Note:
-    This method works for fractional knapsack but not
-    for 0/1 knapsack, where items cannot be divided.
-
-Time Complexity:
-    O(n log n) for sorting the items.
-
-Space Complexity:
-    O(n) for storing the sorted items and results.
 """
 
 
@@ -32,7 +22,7 @@ def fractional_knapsack(items, capacity):
              the fraction taken from each item.
              Zero-weight items are always included.
 
-    ValueError: If the capacity is negative.
+    Error: If the capacity is negative.
 
     """
     if capacity < 0:
